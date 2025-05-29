@@ -1,17 +1,19 @@
-// middlewares/authorizeMiddleware.js
-
 export const isAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
+if (req.isAuthenticated()) {
     return next();
   }
-  res.status(401).json({ success: false, message: "Unauthorized" });
+  // Optionally, redirect to login or send an error
+  res.status(401).json({ message: "Unauthorized: Please log in first" });
+  // Or, for traditional web apps, use:
+  // res.redirect('/login');
+}
+
+export const isAdmin = (req, res, next) => {
+  if (req.user.role === 'admin') return next();
+  res.status(403).json({ error: 'Admins only' });
 };
 
-export const authorizeRoles = (...roles) => {
-  return (req, res, next) => {
-    if (!req.user || !roles.includes(req.user.role)) {
-      return res.status(403).json({ success: false, message: "Forbidden" });
-    }
-    next();
-  };
+export const isRider = (req, res, next) => {
+  if (req.user.role === 'rider') return next();
+  res.status(403).json({ error: 'Riders only' });
 };
