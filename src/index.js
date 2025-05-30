@@ -41,12 +41,15 @@ app.use(
         "'self'",
         "'unsafe-inline'",
         "https://fonts.googleapis.com", // Google API
-        process.env.BACKEND_URL ||
-          "https://gamekart-abc4d465fae0.herokuapp.com",
       ],
       fontSrc: ["'self'", "data:"],
       imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'", "https://www.googleapis.com"],
+      connectSrc: [
+        "'self'",
+        "https://www.googleapis.com",
+        process.env.BACKEND_URL ||
+          "https://gamekart-abc4d465fae0.herokuapp.com",
+      ],
       frameSrc: ["'self'", "https://accounts.google.com"],
     },
   })
