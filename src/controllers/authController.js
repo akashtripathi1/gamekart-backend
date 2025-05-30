@@ -32,7 +32,8 @@ export const logout = (req, res) => {
         console.error("Session destruction error:", err);
       }
 
-      res.clearCookie("connect.sid");
+      // Clear the right cookie:
+      res.clearCookie("gamekart.sid", { path: "/" });
       res.redirect(process.env.CLIENT_URL);
     });
   });
