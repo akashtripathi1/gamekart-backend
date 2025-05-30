@@ -37,7 +37,13 @@ app.use(
         "https://accounts.google.com",
         "https://apis.google.com",
       ],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://fonts.googleapis.com", // Google API
+        process.env.BACKEND_URL ||
+          "https://gamekart-abc4d465fae0.herokuapp.com",
+      ],
       fontSrc: ["'self'", "data:"],
       imgSrc: ["'self'", "data:"],
       connectSrc: ["'self'", "https://www.googleapis.com"],
@@ -57,6 +63,7 @@ app.use(
       maxAge: 24 * 60 * 60 * 1000, // 1 day
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
     },
   })
 );
