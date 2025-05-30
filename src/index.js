@@ -8,6 +8,7 @@ import session from "express-session";
 import passport from "passport";
 import connectDB from "./config/db.js";
 import errorMiddleware from "./middlewares/errorHandleMiddleware.js";
+import helmet from "helmet";
 
 dotenv.config();
 connectDB(); // Connect to MongoDB
@@ -23,6 +24,25 @@ app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
     credentials: true,
+  })
+);
+
+// Helmet CSP middleware
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "https://accounts.google.com",
+        "https://apis.google.com",
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "data:"],
+      imgSrc: ["'self'", "data:"],
+      connectSrc: ["'self'", "https://www.googleapis.com"],
+      frameSrc: ["'self'", "https://accounts.google.com"],
+    },
   })
 );
 
@@ -50,8 +70,8 @@ import "./config/passport.js";
 
 // Routes
 import authRoutes from "./routes/authRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js"
-import adminRoutes from "./routes/adminRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
