@@ -11,7 +11,8 @@ const seedEmails = async () => {
     { email: "akashtripathi1729@gmail.com", role: "customer" },
     { email: "akashtripathidev@gmail.com", role: "admin" },
     { email: "liverecording.kgp@gmail.com", role: "rider" },
-    { email: "akashtripathi@kgpian.iitkgp.ac.in", role: "rider" }
+    { email: "akashtripathi@kgpian.iitkgp.ac.in", role: "rider" },
+    { email: "abhishek@zuvees.com", role: "admin" }
   ];
 
   for (const email of emails) {

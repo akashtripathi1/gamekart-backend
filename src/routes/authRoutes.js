@@ -13,14 +13,13 @@ router.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
-    callbackURL: "/api/auth/google/callback",
   })
 );
 
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/login",
+    failureRedirect: process.env.FRONTEND_URL + "/login",
     session: true,
   }),
   handleGoogleCallback
