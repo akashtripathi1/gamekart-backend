@@ -51,8 +51,10 @@ import "./config/passport.js";
 // Routes
 import authRoutes from "./routes/authRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => res.send("Server is running"));
 
